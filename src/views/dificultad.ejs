@@ -14,23 +14,34 @@
 background-size: cover; 
 background-position: center center; 
 background-attachment: fixed;">
-    <div class="game-container">
-        <h1>Selecciona tu nivel de dificultad</h1>
+    
+    <!-- Contenedor Principal -->
+    <div class="game-container" role="main" aria-labelledby="difficulty-title">
+        <h1 id="difficulty-title">Selecciona tu nivel de dificultad</h1>
+        
         <div class="difficulty-buttons">
-            <button class="difficulty-button" data-time="180">🔰 Muy Fácil (3 min) <br> "Tiempo extra para
-                pensar"</button>
-            <button class="difficulty-button" data-time="150">🟢 Fácil (2 min 30 seg) <br> "Un ritmo tranquilo"</button>
-            <button class="difficulty-button" data-time="120">🟡 Moderado (2 min) <br> "Desafío balanceado"</button>
-            <button class="difficulty-button" data-time="90">🔴 Difícil (1 min 30 seg) <br> "Un reto acelerado"</button>
-            <button class="difficulty-button" data-time="60">🔥 Muy Difícil (1 min) <br> "¡Solo para los
-                valientes!"</button>
+            <button class="difficulty-button" data-time="180" aria-label="Muy Fácil, tres minutos, tiempo extra para pensar">
+                🔰 Muy Fácil (3 min) <br> "Tiempo extra para pensar"
+            </button>
+            <button class="difficulty-button" data-time="150" aria-label="Fácil, dos minutos y treinta segundos, un ritmo tranquilo">
+                🟢 Fácil (2 min 30 seg) <br> "Un ritmo tranquilo"
+            </button>
+            <button class="difficulty-button" data-time="120" aria-label="Moderado, dos minutos, desafío balanceado">
+                🟡 Moderado (2 min) <br> "Desafío balanceado"
+            </button>
+            <button class="difficulty-button" data-time="90" aria-label="Difícil, un minuto y treinta segundos, un reto acelerado">
+                🔴 Difícil (1 min 30 seg) <br> "Un reto acelerado"
+            </button>
+            <button class="difficulty-button" data-time="60" aria-label="Muy Difícil, un minuto, solo para los valientes">
+                🔥 Muy Difícil (1 min) <br> "¡Solo para los valientes!"
+            </button>
         </div>
     </div>
 
     <!-- Mensaje de confirmación (oculto por defecto) -->
     <div id="difficultyMessage" class="difficulty-message hidden" role="alert" aria-live="assertive">
         <p id="difficultyText"></p>
-        <button id="confirmDifficulty">Comenzar</button>
+        <button id="confirmDifficulty" aria-describedby="difficultyText">Comenzar</button>
     </div>
 
     <script src="js/keyboardNavigation.js"></script>

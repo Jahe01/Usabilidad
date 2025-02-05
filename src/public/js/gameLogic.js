@@ -236,30 +236,62 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     
     function showFinalScore() {
-        // Obtener el puntaje más alto almacenado
-        let highScore = JSON.parse(localStorage.getItem("highScore")) || { score: 0, player: "Nadie", difficulty: "N/A" };
+        // Obtener la tabla de clasificación desde localStorage
+        let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
     
-        // Verificar si el puntaje actual es mayor al récord
-        if (score > highScore.score) {
-            highScore = {
-                score: score,
-                player: playerName,
-                difficulty: getDifficultyLabel(questionTime)
-            };
+        // Crear un nuevo registro para el jugador actual
+        let newEntry = {
+            player: playerName,
+            score: score,
+            difficulty: getDifficultyLabel(questionTime),
+            date: new Date().toLocaleString()
+        };
     
-            // Guardar el nuevo puntaje más alto
-            localStorage.setItem("highScore", JSON.stringify(highScore));
+        // Agregar el nuevo puntaje a la tabla de clasificación
+        leaderboard.push(newEntry);
     
-            console.log("🏆 Nuevo récord guardado:", highScore);
-        }
+        // Ordenar los puntajes de mayor a menor
+        leaderboard.sort((a, b) => b.score - a.score);
     
-        // Mostrar el puntaje final y el récord en la pantalla
-        document.querySelector(".game-container").innerHTML = `
-            <h2>¡Juego terminado! 🏆</h2>
+        // Mantener solo los 5 mejores puntajes
+        leaderboard = leaderboard.slice(0, 5);
+    
+        // Guardar la clasificación en localStorage
+        localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+    
+        // Generar la tabla de clasificación en HTML
+        let leaderboardHTML = `
+            <h2>🏆 ¡Juego terminado! 🏆</h2>
             <p>Tu puntuación final: <strong>${score}</strong></p>
-            <p>Récord actual: <strong>${highScore.score}</strong> por ${highScore.player} en dificultad ${highScore.difficulty}</p>
-            <button class="next-button" onclick="window.location.reload()">Jugar de nuevo 🔄</button>
+            <h3>📋 Tabla de clasificación:</h3>
+            <table border="1">
+                <tr>
+                    <th>Posición</th>
+                    <th>Jugador</th>
+                    <th>Puntaje</th>
+                    <th>Dificultad</th>
+                    <th>Fecha</th>
+                </tr>
         `;
+    
+        leaderboard.forEach((entry, index) => {
+            leaderboardHTML += `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${entry.player}</td>
+                    <td>${entry.score}</td>
+                    <td>${entry.difficulty}</td>
+                    <td>${entry.date}</td>
+                </tr>
+            `;
+        });
+    
+        leaderboardHTML += `</table>
+            <button class="next-button" onclick="window.location.href='/'">Jugar de nuevo 🔄</button>
+        `;
+    
+        // Mostrar la tabla de clasificación en la pantalla
+        document.querySelector(".game-container").innerHTML = leaderboardHTML;
     }
     
     
