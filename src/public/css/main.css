@@ -546,3 +546,93 @@ input#playerName:focus {
     gap: 10px;
     width: 100%;
 }
+
+.video-container {
+    position: relative;
+    display: inline-block;
+}
+
+.video-control-button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    color: transparent;
+    cursor: pointer;
+    outline: none;
+}
+.video-control-button:focus {
+    outline: 3px solid #ff9800;
+}
+
+/* Animación para respuesta correcta: efecto "pop" */
+@keyframes animacion-correcta {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* Animación para respuesta incorrecta: efecto de "temblor" lateral */
+@keyframes animacion-incorrecta {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    50% { transform: translateX(10px); }
+    75% { transform: translateX(-10px); }
+    100% { transform: translateX(0); }
+}
+
+.correct {
+    animation: animacion-correcta 0.5s ease;
+    background-color: #a0e7a0 !important; /* Verde claro para acierto */
+}
+
+.incorrect {
+    animation: animacion-incorrecta 0.5s ease;
+    background-color: #f7a8a8 !important; /* Rojo claro para error */
+}
+
+/* Estilos para la tabla de clasificación */
+table {
+    width: 100%;
+    max-width: 500px;
+    border-collapse: collapse;
+    margin: 20px auto;
+    font-family: 'Arial', sans-serif;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background: #ff9800;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+tr:nth-child(even) {
+    background: #f3f3f3;
+}
+
+tr:hover {
+    background: #ffe0b2;
+    transition: 0.3s;
+}
+
+td {
+    border-bottom: 1px solid #ddd;
+}
+
+td:first-child {
+    font-weight: bold;
+    color: #ff5722;
+}
